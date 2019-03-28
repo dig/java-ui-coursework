@@ -84,13 +84,12 @@ public class Pizza {
     @Override
     public String toString() {
         String str = "";
-        DecimalFormat decFormat = new DecimalFormat("##.00");
         
-        str += "TOTAL COST: £" + decFormat.format(this.getTotalCost()) + "\n";
+        str += String.format("TOTAL COST: £%.2f\n", this.getTotalCost());
         str += this.size.toString() + "\n";
         str += this.crust.toString() + "\n";
         
-        str += "BASE COST: £" + decFormat.format(this.getBaseCost()) + "\n";
+        str += String.format("BASE COST: £%.2f\n", this.getBaseCost());
         
         for (int i = 0; i < this.toppings.size(); i++) {
             Topping topping = this.toppings.get(i);

@@ -22,7 +22,7 @@ public enum Size {
     
     @Override
     public String toString() {
-        return this.name + " Size: £" + this.cost;
+        return String.format("%s Size: £%.2f", this.name, this.cost);
     }
     
 }

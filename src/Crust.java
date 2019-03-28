@@ -22,7 +22,7 @@ public enum Crust {
     
     @Override
     public String toString() {
-        return this.name + " Crust: £" + this.cost;
+        return String.format("%s Crust: £%.2f", this.name, this.cost);
     }
     
 }

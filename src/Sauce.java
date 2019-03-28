@@ -21,7 +21,7 @@ public enum Sauce {
     
     @Override
     public String toString() {
-        return this.name + " Sauce: £" + this.cost;
+        return String.format("%s Sauce: £%.2f", this.name, this.cost);
     }
     
 }

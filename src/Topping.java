@@ -28,8 +28,7 @@ public enum Topping {
     }
     
     public String toString(int amount) {
-        return this.name + " Topping: " + amount + "* £" + this.cost + " = £" 
-                + (this.cost * amount);
+        return String.format("%s Topping: %s* £%.2f = £%.2f", this.name, amount, this.cost, (this.cost * amount));
     }
     
 }
