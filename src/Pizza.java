@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Pizza {
@@ -58,6 +59,47 @@ public class Pizza {
     
     public void removeTopping(Topping topping) {
         this.toppings.remove(topping);
+    }
+    
+    public double getBaseCost() {
+        return this.size.getCost() 
+                + this.crust.getCost();
+    }
+    
+    public double getTotalCost() {
+        double totalCost = this.getBaseCost()
+                + this.sauce.getCost();
+        
+        //--- Loop over every topping on pizza and add to cost
+        for (int i = 0; i < this.toppings.size(); i++) {
+            Topping topping = this.toppings.get(i);
+            
+            //--- If topping is first then 5 tablespoonfills else 4.
+            totalCost += topping.getCost() * (i > 0 ? 4 : 5);
+        }
+        
+        return totalCost;
+    }
+    
+    @Override
+    public String toString() {
+        String str = "";
+        DecimalFormat decFormat = new DecimalFormat("##.00");
+        
+        str += "TOTAL COST: £" + decFormat.format(this.getTotalCost()) + "\n";
+        str += this.size.toString() + "\n";
+        str += this.crust.toString() + "\n";
+        
+        str += "BASE COST: £" + decFormat.format(this.getBaseCost()) + "\n";
+        
+        for (int i = 0; i < this.toppings.size(); i++) {
+            Topping topping = this.toppings.get(i);
+            str += topping.toString(i > 0 ? 4 : 5) + "\n";
+        }
+        
+        str += this.sauce.toString();
+        
+        return str;
     }
     
 }

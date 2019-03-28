@@ -1,20 +1,35 @@
 public enum Topping {
     
-    NONE(0),
-    OLIVES(.08),
-    EXTRA_CHEESE(.02),
-    CHILLI(.06),
-    PEPPERONI(.10),
-    MUSHROOM(.03),
-    ROCKET(.05),
-    JALAPENOS(.20),
-    ONION(.07),
-    ANCHOVY(.09);
+    NONE("None", 0),
+    OLIVES("Olive", .08),
+    EXTRA_CHEESE("Extra Cheese", .02),
+    CHILLI("Chilli", .06),
+    PEPPERONI("Pepperoni", .10),
+    MUSHROOM("Mushroom", .03),
+    ROCKET("Rocket", .05),
+    JALAPENOS("Jalapenos", .20),
+    ONION("Onion", .07),
+    ANCHOVY("Anchovy", .09);
     
-    double cost;
+    private String name;
+    private double cost;
     
-    Topping(double cost) {
+    Topping(String name, double cost) {
+        this.name = name;
         this.cost = cost;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public double getCost() {
+        return this.cost;
+    }
+    
+    public String toString(int amount) {
+        return this.name + " Topping: " + amount + "* £" + this.cost + " = £" 
+                + (this.cost * amount);
     }
     
 }

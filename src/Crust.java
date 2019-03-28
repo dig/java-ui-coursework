@@ -1,13 +1,28 @@
 public enum Crust {
     
-    THIN(1.08),
-    DEEP(1.10),
-    STUFFED(2.14);
+    THIN("Thin", 1.08),
+    DEEP("Deep", 1.10),
+    STUFFED("Stuffed", 2.14);
     
-    double cost;
+    private String name;
+    private double cost;
     
-    Crust(double cost) {
+    Crust(String name, double cost) {
+        this.name = name;
         this.cost = cost;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public double getCost() {
+        return this.cost;
+    }
+    
+    @Override
+    public String toString() {
+        return this.name + " Crust: £" + this.cost;
     }
     
 }

@@ -1,13 +1,28 @@
 public enum Size {
     
-    SMALL(9.45),
-    MEDIUM(11.87),
-    LARGE(15.90);
+    SMALL("Small", 9.45),
+    MEDIUM("Medium", 11.87),
+    LARGE("Large", 15.90);
     
-    double cost;
+    private String name;
+    private double cost;
     
-    Size(double cost) {
+    Size(String name, double cost) {
+        this.name = name;
         this.cost = cost;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public double getCost() {
+        return this.cost;
+    }
+    
+    @Override
+    public String toString() {
+        return this.name + " Size: £" + this.cost;
     }
     
 }

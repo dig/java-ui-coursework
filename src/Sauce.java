@@ -1,12 +1,27 @@
 public enum Sauce {
     
-    TOMATO(0),
-    PESTO(.50);
+    TOMATO("Tomato", 0),
+    PESTO("Pesto", .50);
     
-    double cost;
+    private String name;
+    private double cost;
     
-    Sauce(double cost) {
+    Sauce(String name, double cost) {
+        this.name = name;
         this.cost = cost;
+    }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public double getCost() {
+        return this.cost;
+    }
+    
+    @Override
+    public String toString() {
+        return this.name + " Sauce: £" + this.cost;
     }
     
 }
