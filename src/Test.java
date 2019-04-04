@@ -6,7 +6,7 @@ public class Test {
     
     public static void main(String[] args) {
         //--- First sample pizza
-        Pizza samplePizza1 = new Pizza(Size.MEDIUM, Crust.THIN, Sauce.PESTO, 
+        Pizza samplePizza1 = new Pizza(1, Size.MEDIUM, Crust.THIN, Sauce.PESTO, 
                 Topping.EXTRA_CHEESE,
                 Topping.CHILLI
         );
@@ -14,7 +14,7 @@ public class Test {
         System.out.println(samplePizza1.toString() + "\n");
         
         //--- Second sample pizza
-        Pizza samplePizza2 = new Pizza(Size.MEDIUM, Crust.STUFFED, Sauce.PESTO, 
+        Pizza samplePizza2 = new Pizza(2, Size.MEDIUM, Crust.STUFFED, Sauce.PESTO, 
                 Topping.OLIVES,
                 Topping.ONION
         );
@@ -22,7 +22,7 @@ public class Test {
         System.out.println(samplePizza2.toString() + "\n");
         
         //--- Third sample pizza
-        Pizza samplePizza3 = new Pizza(Size.SMALL, Crust.THIN, Sauce.PESTO, 
+        Pizza samplePizza3 = new Pizza(3, Size.SMALL, Crust.THIN, Sauce.PESTO, 
                 Topping.CHILLI,
                 Topping.PEPPERONI
         );
@@ -30,7 +30,7 @@ public class Test {
         System.out.println(samplePizza3.toString() + "\n");
          
         //--- Fourth sample pizza
-        Pizza samplePizza4 = new Pizza(Size.SMALL, Crust.THIN, Sauce.PESTO, 
+        Pizza samplePizza4 = new Pizza(4, Size.SMALL, Crust.THIN, Sauce.PESTO, 
                 Topping.OLIVES,
                 Topping.OLIVES
         );
@@ -38,7 +38,7 @@ public class Test {
         System.out.println(samplePizza4.toString() + "\n");
         
         //--- Testing adding and removing toppings methods
-        Pizza samplePizza5 = new Pizza(Size.SMALL, Crust.THIN, Sauce.PESTO);
+        Pizza samplePizza5 = new Pizza(5, Size.SMALL, Crust.THIN, Sauce.PESTO);
         
         System.out.println("--- ADDING TOPPINGS ---");
         samplePizza5.addTopping(Topping.JALAPENOS);

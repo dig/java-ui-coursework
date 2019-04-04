@@ -6,26 +6,32 @@ import java.util.ArrayList;
 
 public class Pizza {
     
+    private int id;
     private Size size;
     private Crust crust;
     private Sauce sauce;
     private ArrayList<Topping> toppings;
     
-    public Pizza(Size size, Crust crust, Sauce sauce) {
+    public Pizza(int id, Size size, Crust crust, Sauce sauce) {
+        this.id = id;
         this.size = size;
         this.crust = crust;
         this.sauce = sauce;
         this.toppings = new ArrayList<>();
     }
     
-    public Pizza(Size size, Crust crust, Sauce sauce, Topping topping1) {
-        this(size, crust, sauce);
+    public Pizza(int id, Size size, Crust crust, Sauce sauce, Topping topping1) {
+        this(id, size, crust, sauce);
         this.toppings.add(topping1);
     }
     
-    public Pizza(Size size, Crust crust, Sauce sauce, Topping topping1, Topping topping2) {
-        this(size, crust, sauce, topping1);
+    public Pizza(int id, Size size, Crust crust, Sauce sauce, Topping topping1, Topping topping2) {
+        this(id, size, crust, sauce, topping1);
         this.toppings.add(topping2);
+    }
+    
+    public int getId() {
+        return this.id;
     }
     
     public Size getSize() {
