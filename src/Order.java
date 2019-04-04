@@ -24,6 +24,26 @@ public class Order {
         return this.pizzas;
     }
     
+    public boolean removePizza(int id) {
+        for (Pizza pizza : this.pizzas) {
+            if (pizza.getId() == id) {
+                return this.pizzas.remove(pizza);
+            }
+        }
+        
+        return false;
+    }
+    
+    public void updatePizza(int id, Pizza newPizza) {
+        for (int i = 0; i < this.pizzas.size(); i++) {
+            Pizza pizza = this.pizzas.get(i);
+            
+            if (pizza.getId() == id) {
+                this.pizzas.set(i, newPizza);
+            }
+        }
+    }
+    
     public double getTotalCost() {
         double cost = 0;
         
@@ -40,7 +60,13 @@ public class Order {
     
     @Override
     public String toString() {
-        return "";
+        String str = "";
+        
+        for (Pizza pizza : this.pizzas) {
+            str += pizza.toString() + "\n\n";
+        }
+        
+        return str;
     }
     
 }

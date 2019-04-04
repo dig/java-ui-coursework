@@ -1,5 +1,6 @@
 /**
  * @author Joseph.
+ * @description Demonstrates the pizza class.
  */
 
 public class Test {
