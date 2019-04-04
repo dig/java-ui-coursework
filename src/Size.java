@@ -1,3 +1,7 @@
+/**
+ * @author Joseph.
+ */
+
 public enum Size {
     
     SMALL("Small", 9.45),
