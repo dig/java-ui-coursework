@@ -2,6 +2,8 @@
  * @author Joseph.
  */
 
+package dev.joseph;
+
 public enum Topping {
     
     NONE("None", 0),

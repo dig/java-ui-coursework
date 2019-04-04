@@ -2,16 +2,18 @@
  * @author Joseph.
  */
 
-public enum Size {
+package dev.joseph;
+
+public enum Crust {
     
-    SMALL("Small", 9.45),
-    MEDIUM("Medium", 11.87),
-    LARGE("Large", 15.90);
+    THIN("Thin", 1.08),
+    DEEP("Deep", 1.10),
+    STUFFED("Stuffed", 2.14);
     
     private String name;
     private double cost;
     
-    Size(String name, double cost) {
+    Crust(String name, double cost) {
         this.name = name;
         this.cost = cost;
     }
@@ -26,7 +28,7 @@ public enum Size {
     
     @Override
     public String toString() {
-        return String.format("%s Size: £%.2f", this.name, this.cost);
+        return String.format("%s Crust: £%.2f", this.name, this.cost);
     }
     
 }

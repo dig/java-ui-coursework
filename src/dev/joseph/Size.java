@@ -2,15 +2,18 @@
  * @author Joseph.
  */
 
-public enum Sauce {
+package dev.joseph;
+
+public enum Size {
     
-    TOMATO("Tomato", 0),
-    PESTO("Pesto", .50);
+    SMALL("Small", 9.45),
+    MEDIUM("Medium", 11.87),
+    LARGE("Large", 15.90);
     
     private String name;
     private double cost;
     
-    Sauce(String name, double cost) {
+    Size(String name, double cost) {
         this.name = name;
         this.cost = cost;
     }
@@ -25,7 +28,7 @@ public enum Sauce {
     
     @Override
     public String toString() {
-        return String.format("%s Sauce: £%.2f", this.name, this.cost);
+        return String.format("%s Size: £%.2f", this.name, this.cost);
     }
     
 }

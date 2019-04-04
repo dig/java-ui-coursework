@@ -2,16 +2,17 @@
  * @author Joseph.
  */
 
-public enum Crust {
+package dev.joseph;
+
+public enum Sauce {
     
-    THIN("Thin", 1.08),
-    DEEP("Deep", 1.10),
-    STUFFED("Stuffed", 2.14);
+    TOMATO("Tomato", 0),
+    PESTO("Pesto", .50);
     
     private String name;
     private double cost;
     
-    Crust(String name, double cost) {
+    Sauce(String name, double cost) {
         this.name = name;
         this.cost = cost;
     }
@@ -26,7 +27,7 @@ public enum Crust {
     
     @Override
     public String toString() {
-        return String.format("%s Crust: £%.2f", this.name, this.cost);
+        return String.format("%s Sauce: £%.2f", this.name, this.cost);
     }
     
 }

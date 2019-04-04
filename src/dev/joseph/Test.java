@@ -3,6 +3,8 @@
  * @description Demonstrates the pizza class.
  */
 
+package dev.joseph;
+
 public class Test {
     
     public static void main(String[] args) {
