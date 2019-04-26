@@ -9,17 +9,21 @@ import dev.joseph.Pizza;
 import dev.joseph.Sauce;
 import dev.joseph.Size;
 import dev.joseph.Topping;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
-public class AddForm extends javax.swing.JFrame {
+public class EditForm extends javax.swing.JFrame {
     
+    private int id;
     private Pizza pizza;
     private OrderForm orderForm;
+    private boolean initialized = false;
 
-    public AddForm(int id, OrderForm orderForm) {
+    public EditForm(int id, OrderForm orderForm) {
         initComponents();
         
-        this.pizza = new Pizza(id, Size.SMALL, Crust.THIN, Sauce.TOMATO);
+        this.id = id;
+        this.pizza = orderForm.getOrder().getAllPizzas().get(id);
         this.orderForm = orderForm;
         
         //--- Fill pizza size combo box values.
@@ -28,6 +32,7 @@ public class AddForm extends javax.swing.JFrame {
             sizeArray[i] = Size.values()[i].getName();
         }
         sizeComboBox.setModel(new DefaultComboBoxModel(sizeArray));
+        sizeComboBox.setSelectedIndex(this.pizza.getSize().ordinal());
         
         //--- Fill pizza crust combo box values.
         String[] crustArray = new String[Crust.values().length];
@@ -35,6 +40,7 @@ public class AddForm extends javax.swing.JFrame {
             crustArray[i] = Crust.values()[i].getName();
         }
         crustComboBox.setModel(new DefaultComboBoxModel(crustArray));
+        crustComboBox.setSelectedIndex(this.pizza.getCrust().ordinal());
         
         //--- Fill pizza topping combo box values.
         String[] toppingArray = new String[Topping.values().length];
@@ -44,19 +50,32 @@ public class AddForm extends javax.swing.JFrame {
         toppingComboBox.setModel(new DefaultComboBoxModel(toppingArray));
         toppingComboBox2.setModel(new DefaultComboBoxModel(toppingArray));
         
+        //--- Set topping combo boxes to correct index.
+        ArrayList<Topping> toppings = this.pizza.getToppings();
+        if (toppings.size() > 0) {
+            toppingComboBox.setSelectedIndex(toppings.get(0).ordinal());
+        }
+        if (toppings.size() > 1) {
+            toppingComboBox2.setSelectedIndex(toppings.get(1).ordinal());
+        }
+        
         //--- Fill pizza sauce combo box values.
         String[] sauceArray = new String[Sauce.values().length];
         for (int i = 0; i < sauceArray.length; i++) {
             sauceArray[i] = Sauce.values()[i].getName();
         }
         sauceComboBox.setModel(new DefaultComboBoxModel(sauceArray));
+        sauceComboBox.setSelectedIndex(this.pizza.getSauce().ordinal());
         
         //--- Update output text area.
         this.updateOutput();
+        
+        //--- Finish form.
+        this.initialized = true;
     }
     
     public void updateOutput() {
-        this.outputArea.setText(pizza.toString());
+        this.outputArea.setText(this.pizza.toString());
     }
 
     @SuppressWarnings("unchecked")
@@ -79,6 +98,7 @@ public class AddForm extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(262, 337));
         setResizable(false);
 
         jLabel1.setText("Size");
@@ -133,7 +153,7 @@ public class AddForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Add");
+        jButton2.setText("Edit");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -174,7 +194,7 @@ public class AddForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(sizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -196,11 +216,10 @@ public class AddForm extends javax.swing.JFrame {
                     .addComponent(sauceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)))
         );
 
         pack();
@@ -208,7 +227,7 @@ public class AddForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //--- Update main order form.
-        this.orderForm.getOrder().addPizza(this.pizza);
+        this.orderForm.getOrder().updatePizza(id, pizza);
         this.orderForm.updateOutput();
         
         //--- Destroy this form.
@@ -237,21 +256,25 @@ public class AddForm extends javax.swing.JFrame {
     }//GEN-LAST:event_crustComboBoxActionPerformed
 
     private void toppingComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toppingComboBoxActionPerformed
-        //--- Clear old toppings and add new ones.
-        this.pizza.getToppings().clear();
-        this.pizza.addTopping(Topping.values()[this.toppingComboBox.getSelectedIndex()]);
-        this.pizza.addTopping(Topping.values()[this.toppingComboBox2.getSelectedIndex()]);
-        
-        this.updateOutput();
+        if (initialized) {
+            //--- Clear old toppings and add new ones.
+            this.pizza.getToppings().clear();
+            this.pizza.addTopping(Topping.values()[this.toppingComboBox.getSelectedIndex()]);
+            this.pizza.addTopping(Topping.values()[this.toppingComboBox2.getSelectedIndex()]);
+
+            this.updateOutput();
+        }
     }//GEN-LAST:event_toppingComboBoxActionPerformed
 
     private void toppingComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toppingComboBox2ActionPerformed
-        //--- Clear old toppings and add new ones.
-        this.pizza.getToppings().clear();
-        this.pizza.addTopping(Topping.values()[this.toppingComboBox.getSelectedIndex()]);
-        this.pizza.addTopping(Topping.values()[this.toppingComboBox2.getSelectedIndex()]);
-        
-        this.updateOutput();
+        if (initialized) {
+            //--- Clear old toppings and add new ones.
+            this.pizza.getToppings().clear();
+            this.pizza.addTopping(Topping.values()[this.toppingComboBox.getSelectedIndex()]);
+            this.pizza.addTopping(Topping.values()[this.toppingComboBox2.getSelectedIndex()]);
+
+            this.updateOutput();
+        }
     }//GEN-LAST:event_toppingComboBox2ActionPerformed
 
     private void sauceComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauceComboBoxActionPerformed

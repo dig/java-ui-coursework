@@ -5,6 +5,7 @@
 package dev.joseph.ui;
 
 import dev.joseph.Order;
+import javax.swing.DefaultListModel;
 
 public class OrderForm extends javax.swing.JFrame {
     
@@ -12,6 +13,7 @@ public class OrderForm extends javax.swing.JFrame {
     
     public OrderForm() {
         initComponents();
+        
         this.order = new Order();
     }
     
@@ -25,6 +27,14 @@ public class OrderForm extends javax.swing.JFrame {
         
         //--- Update total cost
         this.totalCost.setText(String.format("£%.2f", this.order.getTotalCost()));
+        
+        //--- Update order items listbox.
+        DefaultListModel model = new DefaultListModel();
+        for (int i = 0; i < this.order.getAmountOfPizzas(); i++) {
+            model.add(i, "Pizza " + (i + 1));
+            this.order.getAllPizzas().get(i).setId(i);
+        }
+        this.orderItems.setModel(model);
     }
 
     @SuppressWarnings("unchecked")
@@ -74,8 +84,18 @@ public class OrderForm extends javax.swing.JFrame {
         });
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,6 +153,16 @@ public class OrderForm extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         new AddForm(this.orderItems.getModel().getSize(), this).setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        //--- Remove pizza and update output.
+        this.order.removePizza(this.orderItems.getSelectedIndex());
+        this.updateOutput();
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        new EditForm(this.orderItems.getSelectedIndex(), this).setVisible(true);
+    }//GEN-LAST:event_editButtonActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

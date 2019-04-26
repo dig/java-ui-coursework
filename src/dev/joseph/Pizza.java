@@ -36,6 +36,10 @@ public class Pizza {
         return this.id;
     }
     
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Size getSize() {
         return this.size;
     }
@@ -104,7 +108,9 @@ public class Pizza {
         
         for (int i = 0; i < this.toppings.size(); i++) {
             Topping topping = this.toppings.get(i);
-            str += topping.toString(i > 0 ? 4 : 5) + "\n";
+            
+            if (topping != Topping.NONE) 
+                str += topping.toString(i > 0 ? 4 : 5) + "\n";
         }
         
         str += this.sauce.toString();
