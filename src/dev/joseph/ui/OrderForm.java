@@ -46,6 +46,7 @@ public class OrderForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        outputArea.setEditable(false);
         outputArea.setColumns(20);
         outputArea.setRows(5);
         jScrollPane1.setViewportView(outputArea);
@@ -56,6 +57,7 @@ public class OrderForm extends javax.swing.JFrame {
         jLabel2.setText("Total Order Cost:");
         jLabel2.setToolTipText("");
 
+        totalCost.setEditable(false);
         totalCost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         totalCost.setText("£0.00");
 

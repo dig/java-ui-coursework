@@ -115,6 +115,7 @@ public class AddForm extends javax.swing.JFrame {
 
         jLabel5.setText("Sauce");
 
+        outputArea.setEditable(false);
         outputArea.setColumns(20);
         outputArea.setRows(5);
         jScrollPane1.setViewportView(outputArea);
