@@ -1,9 +1,5 @@
-.idea
 out
-*.iml
 target/
 .DS_Store
-nbproject/
-build.xml
-manifest.mf
+nbproject/private/
 /build/
